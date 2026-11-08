@@ -1,9 +1,23 @@
-*.flac
-*.lrc
-*.jpg
-*.png
+# Python & Build Artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+build/
+dist/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+
+# Music Data (when used inside a music workspace)
 songs/
 library/
 done/
 no-lyrics/
 covers/
+*.flac
+*.lrc
