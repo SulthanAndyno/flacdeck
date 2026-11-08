@@ -16,7 +16,7 @@ def send_notification(title: str, message: str, urgency: str = "normal") -> bool
         result = subprocess.run(
             [
                 notify_bin,
-                "--app-name=FLAC SD Card Tools",
+                "--app-name=FlacDeck",
                 f"--urgency={urgency}",
                 "--icon=multimedia-player",
                 title,

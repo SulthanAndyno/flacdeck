@@ -1,4 +1,4 @@
-"""Configuration management for FLAC SD Card Tools."""
+"""Configuration management for FlacDeck."""
 
 from __future__ import annotations
 
@@ -44,10 +44,10 @@ class AppConfig:
 
 
 def get_config_path() -> Path:
-    """Return XDG config path for flac-sdcard-tools."""
+    """Return XDG config path for flacdeck."""
     xdg_config = os.environ.get("XDG_CONFIG_HOME")
     base = Path(xdg_config) if xdg_config else Path.home() / ".config"
-    return base / "flac-sdcard-tools" / "config.toml"
+    return base / "flacdeck" / "config.toml"
 
 
 def load_config(config_path: Path | None = None) -> AppConfig:

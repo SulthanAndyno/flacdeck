@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "flac-sdcard-tools"
+name = "flacdeck"
 version = "2.0.0"
 description = "Linux-native CLI toolkit to fetch synced lyrics, organize FLAC libraries, and safely sync/unmount exFAT/FAT32 SD cards."
 readme = "README.md"
@@ -31,10 +31,10 @@ dev = [
 ]
 
 [project.scripts]
-flac-sdcard = "flac_sdcard.cli:app"
+flacdeck = "flacdeck.cli:app"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/flac_sdcard"]
+packages = ["src/flacdeck"]
 
 [dependency-groups]
 dev = [

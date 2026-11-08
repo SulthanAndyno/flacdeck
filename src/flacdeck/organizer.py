@@ -8,7 +8,7 @@ from pathlib import Path
 
 from rich.console import Console
 
-from flac_sdcard.metadata import read_flac_metadata
+from flacdeck.metadata import read_flac_metadata
 
 
 @dataclass

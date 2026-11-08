@@ -5,7 +5,7 @@ from __future__ import annotations
 from collections.abc import Callable
 from pathlib import Path
 
-from flac_sdcard.organizer import organize_library
+from flacdeck.organizer import organize_library
 
 
 def test_organize_library_copies_flac_and_lrc(

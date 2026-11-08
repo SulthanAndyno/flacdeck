@@ -6,8 +6,8 @@ from collections.abc import Callable
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
-from flac_sdcard.config import AppConfig
-from flac_sdcard.lyrics import get_synced_lyrics, process_lyrics_folder
+from flacdeck.config import AppConfig
+from flacdeck.lyrics import get_synced_lyrics, process_lyrics_folder
 
 
 def test_get_synced_lyrics_exact_and_fallback() -> None:
@@ -23,7 +23,7 @@ def test_get_synced_lyrics_exact_and_fallback() -> None:
         {"trackName": "Starboy", "syncedLyrics": "[00:05.00] I'm tryna put you in the worst mood"}
     ]
 
-    with patch("flac_sdcard.lyrics.requests.get", side_effect=[mock_404, mock_search_200]):
+    with patch("flacdeck.lyrics.requests.get", side_effect=[mock_404, mock_search_200]):
         lyrics = get_synced_lyrics("The Weeknd", "Starboy", config=cfg)
         assert lyrics == "[00:05.00] I'm tryna put you in the worst mood"
 
@@ -42,7 +42,7 @@ def test_process_lyrics_folder_saves_lrc_and_skips_existing(
     cfg = AppConfig(songs_dir=songs_dir, embed_lyrics_tag=True)
 
     with patch(
-        "flac_sdcard.lyrics.get_synced_lyrics",
+        "flacdeck.lyrics.get_synced_lyrics",
         return_value="[00:01.00] Namida nagasu koto sura nai mama",
     ):
         stats1 = process_lyrics_folder(songs_dir, config=cfg)

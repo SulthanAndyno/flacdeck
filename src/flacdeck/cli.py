@@ -1,4 +1,4 @@
-"""Rich + Typer CLI with Interactive Menu for FLAC SD Card Tools on Linux."""
+"""Rich + Typer CLI with Interactive Menu for FlacDeck on Linux."""
 
 from __future__ import annotations
 
@@ -13,19 +13,19 @@ from rich.panel import Panel
 from rich.prompt import Confirm, Prompt
 from rich.table import Table
 
-from flac_sdcard.config import load_config
-from flac_sdcard.lyrics import process_lyrics_folder
-from flac_sdcard.metadata import read_flac_metadata, verify_flac_integrity
-from flac_sdcard.notify import send_notification
-from flac_sdcard.organizer import organize_library
-from flac_sdcard.sdcard import (
+from flacdeck.config import load_config
+from flacdeck.lyrics import process_lyrics_folder
+from flacdeck.metadata import read_flac_metadata, verify_flac_integrity
+from flacdeck.notify import send_notification
+from flacdeck.organizer import organize_library
+from flacdeck.sdcard import (
     detect_sdcards,
     safe_unmount_sdcard,
     sync_to_sdcard,
 )
 
 app = typer.Typer(
-    name="flac-sdcard",
+    name="flacdeck",
     help="Linux-native CLI toolkit for FLAC synced lyrics, library organization, and SD card sync.",
     add_completion=True,
 )
@@ -41,7 +41,7 @@ def main_callback(ctx: typer.Context) -> None:
 
 @app.command()
 def menu() -> None:
-    """Buka menu interaktif FLAC SD Card Tools."""
+    """Buka menu interaktif FlacDeck."""
     interactive_menu()
 
 
@@ -67,7 +67,7 @@ def interactive_menu() -> None:
             show_header=True,
             header_style="bold cyan",
             border_style="bright_blue",
-            title="[bold white]FLAC SD Card Tools v2.0 — Interactive Menu[/bold white]",
+            title="[bold white]FlacDeck v2.0 — Interactive Menu[/bold white]",
             caption=caption_str,
         )
         menu_table.add_column("No", justify="center", style="bold yellow", width=4)
@@ -342,7 +342,7 @@ def pipeline(
     console.print(Panel(summary, title="Pipeline Selesai", border_style="bold green"))
 
     if notify:
-        send_notification("FLAC SD Card Tools", summary)
+        send_notification("FlacDeck", summary)
 
 
 @app.command()

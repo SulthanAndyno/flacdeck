@@ -9,8 +9,8 @@ from typing import Any
 import requests
 from rich.console import Console
 
-from flac_sdcard.config import AppConfig
-from flac_sdcard.metadata import embed_lyrics_in_flac, read_flac_metadata
+from flacdeck.config import AppConfig
+from flacdeck.metadata import embed_lyrics_in_flac, read_flac_metadata
 
 
 @dataclass
@@ -36,7 +36,7 @@ def fetch_lrclib_exact(
         response = requests.get(
             api_url,
             params={"artist_name": artist, "track_name": title},
-            headers={"User-Agent": "flac-sdcard-tools/2.0.0 (Linux)"},
+            headers={"User-Agent": "flacdeck/2.0.0 (Linux)"},
             timeout=timeout,
         )
         if response.status_code != 200:
@@ -58,7 +58,7 @@ def fetch_lrclib_search_fallback(
         response = requests.get(
             search_url,
             params={"q": f"{artist} {title}"},
-            headers={"User-Agent": "flac-sdcard-tools/2.0.0 (Linux)"},
+            headers={"User-Agent": "flacdeck/2.0.0 (Linux)"},
             timeout=timeout,
         )
         if response.status_code != 200:

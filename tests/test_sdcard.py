@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from flac_sdcard.sdcard import (
+from flacdeck.sdcard import (
     build_rsync_command,
     build_unmount_command,
     parse_lsblk_json,

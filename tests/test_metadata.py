@@ -7,7 +7,7 @@ from pathlib import Path
 
 from mutagen.flac import FLAC
 
-from flac_sdcard.metadata import (
+from flacdeck.metadata import (
     clean_name,
     embed_lyrics_in_flac,
     format_track,

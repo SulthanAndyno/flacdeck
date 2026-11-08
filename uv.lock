@@ -540,7 +540,7 @@ wheels = [
 ]
 
 [[package]]
-name = "flac-sdcard-tools"
+name = "flacdeck"
 version = "2.0.0"
 source = { editable = "." }
 dependencies = [
