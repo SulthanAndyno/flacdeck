@@ -51,15 +51,15 @@ jobs:
           uv pip install pyinstaller
           uv run pyinstaller \
             --onefile \
-            --name flac-sdcard-linux-x86_64 \
+            --name flacdeck-linux-x86_64 \
             --paths src \
-            src/flac_sdcard/cli.py
+            src/flacdeck/cli.py
 
       - name: Bundle Arch Linux PKGBUILD & Generate SHA256SUMS
         run: |
           cp packaging/arch/PKGBUILD dist/PKGBUILD
           cd dist
-          sha256sum *.whl *.tar.gz *.deb flac-sdcard-linux-x86_64 PKGBUILD > SHA256SUMS
+          sha256sum *.whl *.tar.gz *.deb flacdeck-linux-x86_64 PKGBUILD > SHA256SUMS
           cat SHA256SUMS
 
       - name: Upload Artifacts
@@ -70,7 +70,7 @@ jobs:
             dist/*.whl
             dist/*.tar.gz
             dist/*.deb
-            dist/flac-sdcard-linux-x86_64
+            dist/flacdeck-linux-x86_64
             dist/PKGBUILD
             dist/SHA256SUMS
 
@@ -83,6 +83,6 @@ jobs:
             dist/*.whl
             dist/*.tar.gz
             dist/*.deb
-            dist/flac-sdcard-linux-x86_64
+            dist/flacdeck-linux-x86_64
             dist/PKGBUILD
             dist/SHA256SUMS

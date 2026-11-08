@@ -66,11 +66,11 @@ jobs:
         run: uv sync --all-extras --dev
 
       - name: Run Pytest with Real FLAC Encoding
-        run: uv run pytest --cov=flac_sdcard --cov-report=term-missing
+        run: uv run pytest --cov=flacdeck --cov-report=term-missing
 
       - name: End-to-End CLI & rsync Simulation
         run: |
           mkdir -p /tmp/e2e/songs /tmp/e2e/library /tmp/e2e/sdcard/Music
-          uv run flac-sdcard status --songs-dir /tmp/e2e/songs --library-dir /tmp/e2e/library
-          uv run flac-sdcard doctor --songs-dir /tmp/e2e/songs
-          uv run flac-sdcard sdcard --library-dir /tmp/e2e/library --mount /tmp/e2e/sdcard --dry-run
+          uv run flacdeck status --songs-dir /tmp/e2e/songs --library-dir /tmp/e2e/library
+          uv run flacdeck doctor --songs-dir /tmp/e2e/songs
+          uv run flacdeck sdcard --library-dir /tmp/e2e/library --mount /tmp/e2e/sdcard --dry-run
