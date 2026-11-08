@@ -1,0 +1,88 @@
+name: Build & Release Linux Packages
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-linux-packages:
+    name: Build .deb, Standalone Binary, Wheel & PKGBUILD
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Linux Packaging Tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y dpkg-dev flac rsync binutils
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+
+      - name: Set up Python 3.12
+        run: uv python install 3.12
+
+      - name: Extract Version
+        id: version
+        run: |
+          RAW_VERSION="${GITHUB_REF_NAME#v}"
+          if [[ -z "${RAW_VERSION}" || "${RAW_VERSION}" == "main" ]]; then
+            RAW_VERSION="2.0.0"
+          fi
+          echo "version=${RAW_VERSION}" >> "$GITHUB_OUTPUT"
+
+      - name: Build Python Wheel & Source Tarball
+        run: uv build
+
+      - name: Build Debian/Ubuntu (.deb) Package
+        run: |
+          chmod +x packaging/deb/build-deb.sh
+          ./packaging/deb/build-deb.sh "${{ steps.version.outputs.version }}"
+          mv dist/deb/*.deb dist/
+
+      - name: Build Standalone Linux x86_64 Binary (PyInstaller)
+        run: |
+          uv pip install pyinstaller
+          uv run pyinstaller \
+            --onefile \
+            --name flac-sdcard-linux-x86_64 \
+            --paths src \
+            src/flac_sdcard/cli.py
+
+      - name: Bundle Arch Linux PKGBUILD & Generate SHA256SUMS
+        run: |
+          cp packaging/arch/PKGBUILD dist/PKGBUILD
+          cd dist
+          sha256sum *.whl *.tar.gz *.deb flac-sdcard-linux-x86_64 PKGBUILD > SHA256SUMS
+          cat SHA256SUMS
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-release-packages
+          path: |
+            dist/*.whl
+            dist/*.tar.gz
+            dist/*.deb
+            dist/flac-sdcard-linux-x86_64
+            dist/PKGBUILD
+            dist/SHA256SUMS
+
+      - name: Publish GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: |
+            dist/*.whl
+            dist/*.tar.gz
+            dist/*.deb
+            dist/flac-sdcard-linux-x86_64
+            dist/PKGBUILD
+            dist/SHA256SUMS
