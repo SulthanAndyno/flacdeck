@@ -1,9 +1,9 @@
 [Unit]
 Description=Auto-fetch synced lyrics and organize FLAC music library
-Documentation=https://github.com/SulthanAndyno/flac-sdcard-tools
+Documentation=https://github.com/SulthanAndyno/flacdeck
 
 [Service]
 Type=oneshot
-ExecStart=%h/.local/bin/flac-sdcard pipeline --notify
+ExecStart=%h/.local/bin/flacdeck pipeline --notify
 StandardOutput=journal
 StandardError=journal

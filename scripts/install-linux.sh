@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Universal Linux dependency & CLI installer for flac-sdcard-tools
+# Universal Linux dependency & CLI installer for flacdeck
 # Supports: Arch/Manjaro (pacman), Ubuntu/Debian/Pop!_OS (apt),
 #           Fedora/RHEL (dnf), openSUSE (zypper), Alpine (apk)
 
@@ -35,17 +35,17 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
 if command -v uv >/dev/null 2>&1; then
-    echo "==> Installing flac-sdcard CLI via uv..."
+    echo "==> Installing flacdeck CLI via uv..."
     uv tool install --editable "${PROJECT_ROOT}" --force
 elif command -v pipx >/dev/null 2>&1; then
-    echo "==> Installing flac-sdcard CLI via pipx..."
+    echo "==> Installing flacdeck CLI via pipx..."
     pipx install --editable "${PROJECT_ROOT}" --force
 else
-    echo "==> Installing flac-sdcard CLI into user virtualenv (~/.local/bin)..."
-    mkdir -p "${HOME}/.local/share/flac-sdcard-venv" "${HOME}/.local/bin"
-    python3 -m venv "${HOME}/.local/share/flac-sdcard-venv"
-    "${HOME}/.local/share/flac-sdcard-venv/bin/pip" install --upgrade "${PROJECT_ROOT}"
-    ln -sf "${HOME}/.local/share/flac-sdcard-venv/bin/flac-sdcard" "${HOME}/.local/bin/flac-sdcard"
+    echo "==> Installing flacdeck CLI into user virtualenv (~/.local/bin)..."
+    mkdir -p "${HOME}/.local/share/flacdeck-venv" "${HOME}/.local/bin"
+    python3 -m venv "${HOME}/.local/share/flacdeck-venv"
+    "${HOME}/.local/share/flacdeck-venv/bin/pip" install --upgrade "${PROJECT_ROOT}"
+    ln -sf "${HOME}/.local/share/flacdeck-venv/bin/flacdeck" "${HOME}/.local/bin/flacdeck"
 fi
 
-echo "==> Done! Run 'flac-sdcard' to open the interactive menu."
+echo "==> Done! Run 'flacdeck' to open the interactive menu."

@@ -1,10 +1,10 @@
 [Unit]
 Description=Watch /workspace/Music/songs for new FLAC files
-Documentation=https://github.com/SulthanAndyno/flac-sdcard-tools
+Documentation=https://github.com/SulthanAndyno/flacdeck
 
 [Path]
 PathChanged=/workspace/Music/songs
-Unit=flac-sdcard-watcher.service
+Unit=flacdeck-watcher.service
 
 [Install]
 WantedBy=default.target

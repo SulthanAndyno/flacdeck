@@ -15,25 +15,25 @@ fi
 echo "==> Installing systemd user units to ${SYSTEMD_USER_DIR} (watching ${WATCH_DIR})..."
 mkdir -p "${SYSTEMD_USER_DIR}"
 
-cat > "${SYSTEMD_USER_DIR}/flac-sdcard-watcher.path" <<EOF
+cat > "${SYSTEMD_USER_DIR}/flacdeck-watcher.path" <<EOF
 [Unit]
 Description=Watch ${WATCH_DIR} for new FLAC files
-Documentation=https://github.com/SulthanAndyno/flac-sdcard-tools
+Documentation=https://github.com/SulthanAndyno/flacdeck
 
 [Path]
 PathChanged=${WATCH_DIR}
-Unit=flac-sdcard-watcher.service
+Unit=flacdeck-watcher.service
 
 [Install]
 WantedBy=default.target
 EOF
 
-cp -v "${PROJECT_ROOT}/packaging/systemd/flac-sdcard-watcher.service" "${SYSTEMD_USER_DIR}/"
+cp -v "${PROJECT_ROOT}/packaging/systemd/flacdeck-watcher.service" "${SYSTEMD_USER_DIR}/"
 
 if command -v systemctl >/dev/null 2>&1; then
     systemctl --user daemon-reload
-    systemctl --user enable --now flac-sdcard-watcher.path
-    echo "==> flac-sdcard-watcher.path enabled and active!"
+    systemctl --user enable --now flacdeck-watcher.path
+    echo "==> flacdeck-watcher.path enabled and active!"
 else
     echo "Warning: systemctl not found. Units copied but not enabled."
 fi

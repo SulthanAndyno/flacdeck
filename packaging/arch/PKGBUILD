@@ -1,10 +1,10 @@
 # Maintainer: SulthanAndyno <https://github.com/SulthanAndyno>
-pkgname=flac-sdcard-tools
+pkgname=flacdeck
 pkgver=2.0.0
 pkgrel=1
 pkgdesc="Linux-native CLI toolkit to fetch synced lyrics, organize FLAC libraries, and safely sync/unmount SD cards"
 arch=('any')
-url="https://github.com/SulthanAndyno/flac-sdcard-tools"
+url="https://github.com/SulthanAndyno/flacdeck"
 license=('MIT')
 depends=(
   'python>=3.10'
@@ -30,8 +30,8 @@ build() {
 package() {
   cd "$pkgname-$pkgver"
   python -m installer --destdir="$pkgdir" dist/*.whl
-  install -Dm644 packaging/systemd/flac-sdcard-watcher.path \
-    "$pkgdir/usr/lib/systemd/user/flac-sdcard-watcher.path"
-  install -Dm644 packaging/systemd/flac-sdcard-watcher.service \
-    "$pkgdir/usr/lib/systemd/user/flac-sdcard-watcher.service"
+  install -Dm644 packaging/systemd/flacdeck-watcher.path \
+    "$pkgdir/usr/lib/systemd/user/flacdeck-watcher.path"
+  install -Dm644 packaging/systemd/flacdeck-watcher.service \
+    "$pkgdir/usr/lib/systemd/user/flacdeck-watcher.service"
 }
